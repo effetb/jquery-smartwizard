@@ -489,7 +489,6 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       key: "_resetCSSClass",
       value: function _resetCSSClass(idx, cls, parent) {
         var _this3 = this;
-
         var idxs = $.isArray(idx) ? idx : [idx];
         idxs.map(function (i) {
           if (parent) {
