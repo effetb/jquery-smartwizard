@@ -493,10 +493,10 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         var idxs = $.isArray(idx) ? idx : [idx];
         idxs.map(function (i) {
           if (parent) {
-            _this3.eq(i).parent(parent).removeClass(cls);
+            _this3.steps.eq(i).parent(parent).removeClass(cls);
           }
           else {
-            _this3.eq(i).removeClass(cls);
+            _this3.steps.eq(i).removeClass(cls);
           }
         });
       }
