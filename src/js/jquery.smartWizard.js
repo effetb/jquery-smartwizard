@@ -174,7 +174,7 @@
           // Error steps
           this._setCSSClass(this.options.errorSteps, "danger");
           // Hidden steps
-          this._setCSSClass(this.options.hiddenSteps, "hidden");
+          this._setCSSClass(this.options.hiddenSteps, "hidden", "li");
       }
 
       _setEvents() {
@@ -385,20 +385,30 @@
           }
       }
 
-      _setCSSClass(idx, cls) {
+      _setCSSClass(idx, cls, parent) {
           if (idx === null) {
               return false;
           }
           let idxs = $.isArray(idx) ? idx : [idx];
           idxs.map((i) => {
-              this.steps.eq(i).addClass(cls);
+              if (parent) {
+                  this.steps.eq(i).parent(parent).addClass(cls);
+              }
+              else {
+                  this.steps.eq(i).addClass(cls);
+              }
           });
       }
 
-      _resetCSSClass(idx, cls) {
+      _resetCSSClass(idx, cls, parent) {
           let idxs = $.isArray(idx) ? idx : [idx];
           idxs.map((i) => {
-              this.steps.eq(i).removeClass(cls);
+              if (parent) {
+                  this.steps.eq(i).parent(parent).removeClass(cls);
+              }
+              else {
+                  this.steps.eq(i).removeClass(cls);
+              }
           });
       }
 

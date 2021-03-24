@@ -227,7 +227,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         this._setCSSClass(this.options.errorSteps, "danger"); // Hidden steps
 
 
-        this._setCSSClass(this.options.hiddenSteps, "hidden");
+        this._setCSSClass(this.options.hiddenSteps, "hidden", "li");
       }
     }, {
       key: "_setEvents",
@@ -439,7 +439,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       value: function _isShowable(idx) {
         var elm = this.steps.eq(idx);
 
-        if (elm.hasClass('disabled') || elm.hasClass('hidden')) {
+        if (elm.hasClass('disabled') || elm.parent("li").hasClass('hidden')) {
           return false;
         }
 
@@ -468,7 +468,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       }
     }, {
       key: "_setCSSClass",
-      value: function _setCSSClass(idx, cls) {
+      value: function _setCSSClass(idx, cls, parent) {
         var _this2 = this;
 
         if (idx === null) {
@@ -477,17 +477,27 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
         var idxs = $.isArray(idx) ? idx : [idx];
         idxs.map(function (i) {
-          _this2.steps.eq(i).addClass(cls);
+          if (parent) {
+            _this2.steps.eq(i).parent(parent).addClass(cls);
+          }
+          else {
+            _this2.steps.eq(i).addClass(cls);
+          }
         });
       }
     }, {
       key: "_resetCSSClass",
-      value: function _resetCSSClass(idx, cls) {
+      value: function _resetCSSClass(idx, cls, parent) {
         var _this3 = this;
 
         var idxs = $.isArray(idx) ? idx : [idx];
         idxs.map(function (i) {
-          _this3.steps.eq(i).removeClass(cls);
+          if (parent) {
+            _this3.eq(i).parent(parent).removeClass(cls);
+          }
+          else {
+            _this3.eq(i).removeClass(cls);
+          }
         });
       }
     }, {
@@ -982,12 +992,12 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
             break;
 
           case 'hide':
-            this._setCSSClass(stepArray, 'hidden');
+            this._setCSSClass(stepArray, 'hidden', 'li');
 
             break;
 
           case 'show':
-            this._resetCSSClass(stepArray, 'hidden');
+            this._resetCSSClass(stepArray, 'hidden', 'li');
 
             break;
 
